@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">GoodBoy</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">GoodBoy</string>
+    <string name="home">Home</string>
+    <string name="organization">Organization</string>
+    <string name="events">Events</string>
+    <string name="adoption">Adoption</string>
+    <string name="settings">Settings</string>
+    <string name="feedback">Feedback</string>
+    <string name="user">User</string>
+    <string name="login">Login</string>
+    <string name="share">Share</string>
+    <string name="search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_description_here">Enter description here</string>
+    <string name="subject">Subject</string>
+    <string name="description">Description</string>
+    <string name="enter_subject_here">Enter subject here</string>
+    <string name="send">Send</string>
+    <string name="search_by_breed">Search by breed</string>
+    <string name="search_by_organization">Search by organization</string>
+</resources>
