@@ -17,6 +17,33 @@
     <string name="login">Login</string>
     <string name="share">Share</string>
     <string name="search">Search</string>
+    <string name="dogId">ID</string>
+    <string name="dogBreed">Breed</string>
+    <string name="dogColor">Color</string>
+    <string name="dogCondition">Condition</string>
+    <string name="dogOrganization">Organization</string>
+    <string name="dogGender">Gender</string>
+    <string name="dogAge">Age</string>
+    <string name="dogSize">Size</string>
+    <string name="eventID">ID</string>
+    <string name="eventName">Name</string>
+    <string name="eventDesc">Description</string>
+    <string name="eventDateTime"><![CDATA[Date & Time]]></string>
+    <string name="eventLocation">Location</string>
+    <string name="eventOrganizer">Organizer</string>
+    <string name="userName">Username</string>
+    <string name="userPassword">Password</string>
+    <string name="userRealName">Real Name</string>
+    <string name="userAddress">Address</string>
+    <string name="userContactNo">Contact Number</string>
+    <string name="userAge">Age</string>
+    <string name="userGender">Gender</string>
+    <string name="userICNo">IC Number</string>
+    <string name="organizationId">ID</string>
+    <string name="organizationName">Name</string>
+    <string name="organizationLocation">Location</string>
+    <string name="organizationOwner">Owner</string>
+    <string name="organizationPhoneNo">Phone Number</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
