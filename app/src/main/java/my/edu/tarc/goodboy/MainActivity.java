@@ -201,7 +201,17 @@ public class MainActivity extends AppCompatActivity
 
             fragmentTransaction.commit();
         } else if (id == R.id.nav_login) {
+            setTitle("Login");
 
+            FragmentManager fragmentManager1 = getSupportFragmentManager();
+
+            FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
+
+            FeedbackFragment loginFragment = new FeedbackFragment();
+
+            fragmentTransaction.replace(R.id.fragment_content,loginFragment);
+
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
 
         }

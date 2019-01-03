@@ -54,4 +54,8 @@
     <string name="send">Send</string>
     <string name="search_by_breed">Search by breed</string>
     <string name="search_by_organization">Search by organization</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="passwordHint">Password</string>
+    <string name="usernameHint">Username</string>
 </resources>
