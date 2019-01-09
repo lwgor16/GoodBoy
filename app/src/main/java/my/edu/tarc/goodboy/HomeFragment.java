@@ -1,14 +1,20 @@
 package my.edu.tarc.goodboy;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.security.acl.Group;
 
 
 /**
@@ -33,6 +39,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager2 = (ViewPager) view.findViewById(R.id.viewPager2);
 

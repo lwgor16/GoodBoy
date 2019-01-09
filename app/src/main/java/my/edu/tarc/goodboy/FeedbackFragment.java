@@ -34,7 +34,13 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //Send feedback to us
+                EditText editTextSubject = v.findViewById(R.id.editTextSubject);
+                EditText editTextDesc = v.findViewById(R.id.editTextDesc);
+
+                editTextSubject.setText("");
+                editTextDesc.setText("");
+
+                //send data to database
             }
         }
         );

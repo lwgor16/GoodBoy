@@ -26,7 +26,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
         TextView textViewName, textViewPassword, textViewRealName, textViewAddress, textViewContactNo, textViewAge, textViewGender, textViewICNo;
 
-        textViewName = rowView.findViewById(R.id.textViewName);
+        /*textViewName = rowView.findViewById(R.id.textViewName);
         textViewPassword = rowView.findViewById(R.id.textViewPassword);
         textViewRealName = rowView.findViewById(R.id.textViewRealName);
         textViewAddress = rowView.findViewById(R.id.textViewAddress);
@@ -42,7 +42,7 @@ public class UserAdapter extends ArrayAdapter<User> {
         textViewContactNo.setText(String.format("%s : %s", getContext().getString(R.string.userContactNo), user.getUserContactNumber()));
         textViewAge.setText(String.format("%s : %s", getContext().getString(R.string.userAge), user.getUserAge()));
         textViewGender.setText(String.format("%s : %s", getContext().getString(R.string.userGender), user.getUserGender()));
-        textViewICNo.setText(String.format("%s : %s", getContext().getString(R.string.userICNo), user.getUserICNumber()));
+        textViewICNo.setText(String.format("%s : %s", getContext().getString(R.string.userICNo), user.getUserICNumber()));*/
 
         return rowView;
     }

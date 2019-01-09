@@ -3,6 +3,7 @@ package my.edu.tarc.goodboy;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -40,10 +42,13 @@ public class MainActivity extends AppCompatActivity
     public static final String TAG = "my.edu.tarc.lab44";
     ListView listViewEventLV;
     List<Dog> daList;
-    List<User> uaList;
     private ProgressDialog pDialog;
     private static String DOG_URL = "https://khorwe.000webhostapp.com/select_dog.php";
-    private static String USER_URL = "https://khorwe.000webhostapp.com/select_user.php";
+    private static boolean LoggedIn = false;
+    private static String username = "";
+    private static String realName = "";
+
+    SharedPreferences sharedPreferences;
     RequestQueue queue;
 
     @Override
@@ -61,7 +66,6 @@ public class MainActivity extends AppCompatActivity
 
         pDialog = new ProgressDialog(this);
         daList = new ArrayList<>();
-        uaList = new ArrayList<>();
 
         if (!isConnected()) {
             Toast.makeText(getApplicationContext(), "No network", Toast.LENGTH_LONG).show();
@@ -113,11 +117,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -201,17 +200,36 @@ public class MainActivity extends AppCompatActivity
 
             fragmentTransaction.commit();
         } else if (id == R.id.nav_login) {
-            setTitle("Login");
+            if(LoggedIn == false)
+            {
+                setTitle("Login");
 
-            FragmentManager fragmentManager1 = getSupportFragmentManager();
+                FragmentManager fragmentManager1 = getSupportFragmentManager();
 
-            FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
+                FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
 
-            LoginFragment loginFragment = new LoginFragment();
+                LoginFragment loginFragment = new LoginFragment();
 
-            fragmentTransaction.replace(R.id.fragment_content,loginFragment);
+                fragmentTransaction.replace(R.id.fragment_content,loginFragment);
 
-            fragmentTransaction.commit();
+                fragmentTransaction.commit();
+            }
+            else
+            {
+                SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.pref_file), Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("username", "");
+                editor.putString("realName", "");
+                editor.putBoolean("login", false);
+
+                editor.apply();
+
+                loadData();
+
+                Toast.makeText(getBaseContext(), "Successfully logged out!" , Toast.LENGTH_LONG).show();
+            }
         } else if (id == R.id.nav_share) {
 
         }
@@ -219,5 +237,37 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void loadData()
+    {
+        sharedPreferences = getSharedPreferences(getString(R.string.pref_file), MODE_PRIVATE);
+
+        username = sharedPreferences.getString("username", "");
+        realName = sharedPreferences.getString("realName", "");
+        LoggedIn = sharedPreferences.getBoolean("login", false);
+
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        final View headerLayout = navigationView.getHeaderView(0);
+        final TextView textViewNavUsername = headerLayout.findViewById(R.id.textViewNavHeaderUsername);
+        final TextView textViewNavRealName = headerLayout.findViewById(R.id.textViewNavHeaderRealName);
+        final TextView textViewNotLoggedIn = headerLayout.findViewById(R.id.textViewNotLoggedIn);
+        final Menu menu = navigationView.getMenu();
+        final MenuItem loginItem = menu.findItem(R.id.nav_login);
+
+        if(LoggedIn == true)
+        {
+            textViewNavUsername.setText(username);
+            textViewNavRealName.setText(realName);
+            textViewNotLoggedIn.setText("");
+            loginItem.setTitle("Logout");
+        }
+        else
+        {
+            textViewNavUsername.setText("");
+            textViewNavRealName.setText("");
+            textViewNotLoggedIn.setText("Not logged in");
+            loginItem.setTitle("Login");
+        }
     }
 }

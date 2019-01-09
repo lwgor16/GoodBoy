@@ -69,7 +69,7 @@ public class OrganizationFragment extends Fragment {
         queue = Volley.newRequestQueue(context);
 
         if (!pDialog.isShowing())
-            pDialog.setMessage("Syn with server...");
+            pDialog.setMessage("Sync with server...");
         pDialog.show();
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
@@ -116,6 +116,5 @@ public class OrganizationFragment extends Fragment {
     private void loadOrganization() {
         final OrganizationAdapter adapter = new OrganizationAdapter(getActivity(), R.layout.fragment_organization, oaList);
         listViewOrganization.setAdapter(adapter);
-        Toast.makeText(getContext(), "Count :" + oaList.size(), Toast.LENGTH_LONG).show();
     }
 }
