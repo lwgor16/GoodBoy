@@ -1,19 +1,10 @@
 package my.edu.tarc.goodboy;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,10 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass
- */
-public class OrganizationFragment extends Fragment {
+public class DisplayOrganisationDetails extends AppCompatActivity {
 
     private static RequestQueue queue;
     private ProgressDialog pDialog;
@@ -41,27 +29,25 @@ public class OrganizationFragment extends Fragment {
     ListView listViewOrganization;
     private static final String TAG = "my.edu.tarc.lab44";
     private static String ORGANIZATION_URL = "https://khorwe.000webhostapp.com/select_organization.php";
+    int position = 0;
+    Intent intent;
 
-    public OrganizationFragment() {
-        // Required empty public constructor
-
-    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_organization, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_display_organisation_details);
 
-        pDialog = new ProgressDialog(getActivity());
+        pDialog = new ProgressDialog(this);
 
         oaList = new ArrayList<>();
 
-        listViewOrganization = (ListView) view.findViewById(R.id.listViewOrganization);
+        intent = getIntent();
 
-        downloadOrganization(getContext(), ORGANIZATION_URL);
+        position = intent.getIntExtra("position",0);
 
-        return view;
+        listViewOrganization = (ListView) findViewById(R.id.listView);
+
+        downloadOrganization(this, ORGANIZATION_URL);
     }
 
     private void downloadOrganization(Context context, String url) {
@@ -69,7 +55,7 @@ public class OrganizationFragment extends Fragment {
         queue = Volley.newRequestQueue(context);
 
         if (!pDialog.isShowing())
-            pDialog.setMessage("Sync with server...");
+            pDialog.setMessage("Syn with server...");
         pDialog.show();
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
@@ -80,9 +66,9 @@ public class OrganizationFragment extends Fragment {
                         try
                         {
                             oaList.clear();
-                            for (int i = 0; i < response.length(); i++)
-                            {
-                                JSONObject courseResponse = (JSONObject) response.get(i);
+                            //for (int i = 0; i < response.length(); i++)
+                            //{
+                                JSONObject courseResponse = (JSONObject) response.get(position);
                                 String id = courseResponse.getString("id");
                                 String name = courseResponse.getString("name");
                                 String location = courseResponse.getString("location");
@@ -90,20 +76,20 @@ public class OrganizationFragment extends Fragment {
                                 String phone_no = courseResponse.getString("phone_no");
                                 Organization organization = new Organization(id, name, location, owner, phone_no);
                                 oaList.add(organization);
-                            }
+                            //}
                             loadOrganization();
                             if (pDialog.isShowing())
                                 pDialog.dismiss();
                         } catch (Exception e)
                         {
-                            Toast.makeText(getContext(), "Error:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Error:" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), "Error" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
                         if (pDialog.isShowing())
                             pDialog.dismiss();
                     }
@@ -118,7 +104,10 @@ public class OrganizationFragment extends Fragment {
 
     private void loadOrganization()
     {
-        final OrganizationAdapter adapter = new OrganizationAdapter(getActivity(), R.layout.fragment_organization, oaList);
+        final OrganizationAdapter adapter = new OrganizationAdapter(this, R.layout.fragment_organization, oaList);
         listViewOrganization.setAdapter(adapter);
+        Toast.makeText(this, "Count :" + oaList.size(), Toast.LENGTH_LONG).show();
     }
 }
+
+

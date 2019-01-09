@@ -20,13 +20,15 @@ import java.security.acl.Group;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     ViewPager viewPager, viewPager2;
-    ImageAdapter imageAdapter, imageAdapter2;
+    OrganisationImageAdapter organisationImageAdapter;
+    EventImageAdapter eventImageAdapter;
     LinearLayout sliderDotspanel, sliderDotspanel2;
     private int dotscount,dotscount2;
     private ImageView[] dots, dots2;
+
     public HomeFragment()
     {
         // Required empty public constructor
@@ -34,8 +36,7 @@ public class HomeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -46,18 +47,19 @@ public class HomeFragment extends Fragment {
         sliderDotspanel =  (LinearLayout) view.findViewById(R.id.SliderDots);
         sliderDotspanel2 = (LinearLayout) view.findViewById(R.id.SliderDots2);
 
-        imageAdapter = new ImageAdapter(getActivity());
-        imageAdapter2 = new ImageAdapter(getActivity());
+        organisationImageAdapter = new OrganisationImageAdapter(getActivity());
+        eventImageAdapter = new EventImageAdapter(getActivity());
 
-        viewPager.setAdapter(imageAdapter);
-        viewPager2.setAdapter(imageAdapter2);
+        viewPager.setAdapter(organisationImageAdapter);
+        viewPager2.setAdapter(eventImageAdapter);
 
-        dotscount = imageAdapter.getCount();
-        dotscount2 = imageAdapter2.getCount();
+        dotscount = organisationImageAdapter.getCount();
+        dotscount2 = eventImageAdapter.getCount();
 
         dots = new ImageView[dotscount];
         dots2 = new ImageView[dotscount2];
 
+        //For Organisation Page
         for(int i = 0;i < dotscount;i++)
         {
             dots[i] = new ImageView(getActivity());
@@ -94,6 +96,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        //For Event Page
         for(int i = 0;i < dotscount2;i++)
         {
             dots2[i] = new ImageView(getActivity());
