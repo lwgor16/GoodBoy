@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity
 
             FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
 
-            FeedbackFragment loginFragment = new FeedbackFragment();
+            LoginFragment loginFragment = new LoginFragment();
 
             fragmentTransaction.replace(R.id.fragment_content,loginFragment);
 
