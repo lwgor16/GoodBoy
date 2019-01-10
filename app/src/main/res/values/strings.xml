@@ -45,6 +45,14 @@
     <string name="organizationOwner">Owner</string>
     <string name="organizationPhoneNo">Phone Number</string>
     <string name="pref_file">prefFile</string>
+    <string name="register">Register</string>
+    <string-array name="searchCategory">
+        <item>Breed</item>
+        <item>Color</item>
+        <item>Age</item>
+        <item>Organization</item>
+        <item>Gender</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -60,4 +68,7 @@
     <string name="passwordHint">Password</string>
     <string name="usernameHint">Username</string>
     <string name="not_logged_in">Not logged in</string>
+    <string name="recommended_dogs">Recommended Dogs</string>
+    <string name="search_here">Search here</string>
+    <string name="search_by">Search by:</string>
 </resources>

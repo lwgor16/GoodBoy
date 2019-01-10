@@ -52,9 +52,9 @@ public class LoginFragment extends Fragment {
 
         pDialog = new ProgressDialog(getActivity());
 
-        downloadUser(getContext(), USER_URL);
-
         uaList = new ArrayList<>();
+
+        downloadUser(getContext(), USER_URL);
 
         final EditText editTextUsername = view.findViewById(R.id.editTextUsername);
         final EditText editTextPassword = view.findViewById(R.id.editTextPassword);

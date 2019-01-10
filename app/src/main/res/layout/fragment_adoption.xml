@@ -8,8 +8,37 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <SearchView
-        android:id="@+id/searchView"
+    <TextView
+        android:id="@+id/textViewAdoptionTtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/recommended_dogs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSearchCategory" />
+
+    <ListView
+        android:id="@+id/listViewDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAdoptionTtitle" />
+
+    <EditText
+        android:id="@+id/editTextAdoptionSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -17,55 +46,45 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:ems="10"
+        android:hint="@string/search_here"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAdoptionSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroupAdoption"
-        android:layout_width="368dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+    <Button
+        android:id="@+id/buttonAdoptionSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:checkedButton="@+id/radioButtonBreed"
-        android:orientation="horizontal"
+        android:text="@string/search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/radioButtonBreed"
-            android:layout_width="174dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/search_by_breed" />
-
-        <RadioButton
-            android:id="@+id/radioButtonOrganization"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/search_by_organization" />
-
-    </RadioGroup>
-
-    <ListView
-        android:id="@+id/listViewDog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/textViewSearchBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/search_by"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAdoptionSearch" />
+
+    <Spinner
+        android:id="@+id/spinnerSearchCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupAdoption" />
+        app:layout_constraintStart_toEndOf="@+id/textViewSearchBy"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAdoptionSearch" />
 
 </android.support.constraint.ConstraintLayout>

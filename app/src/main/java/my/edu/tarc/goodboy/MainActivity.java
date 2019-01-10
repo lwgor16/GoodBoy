@@ -39,11 +39,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public static final String TAG = "my.edu.tarc.lab44";
-    ListView listViewEventLV;
-    List<Dog> daList;
-    private ProgressDialog pDialog;
-    private static String DOG_URL = "https://khorwe.000webhostapp.com/select_dog.php";
     private static boolean LoggedIn = false;
     private static String username = "";
     private static String realName = "";
@@ -64,9 +59,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        pDialog = new ProgressDialog(this);
-        daList = new ArrayList<>();
 
         if (!isConnected()) {
             Toast.makeText(getApplicationContext(), "No network", Toast.LENGTH_LONG).show();
@@ -231,7 +223,7 @@ public class MainActivity extends AppCompatActivity
 
                 Toast.makeText(getBaseContext(), "Successfully logged out!" , Toast.LENGTH_LONG).show();
             }
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_register) {
 
         }
 
