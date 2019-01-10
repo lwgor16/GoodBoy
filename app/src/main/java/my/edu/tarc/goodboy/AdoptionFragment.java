@@ -45,12 +45,14 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
     private List<Dog> daList;
     private List<Dog> recommendedList;
     private List<Dog> searchList;
+    private List<Dog> adoptedList;
     private ListView listViewDog;
     private static final String TAG = "my.edu.tarc.lab44";
     private static String USER_URL = "https://khorwe.000webhostapp.com/select_dog.php";
     private EditText editTextAdoptionSearch;
     private Button buttonAdoptionSearch;
     private int spinnerIndex;
+    SharedPreferences sharedPreferences;
 
     public AdoptionFragment() {
         // Required empty public constructor
@@ -62,11 +64,14 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_adoption, container, false);
 
+        //sendMessage = (SendMessage) getActivity();
+
         pDialog = new ProgressDialog(getActivity());
 
         daList = new ArrayList<>();
         recommendedList = new ArrayList<>();
         searchList = new ArrayList<>();
+        adoptedList = new ArrayList<>();
         spinnerIndex = 0;
 
         listViewDog = (ListView) view.findViewById(R.id.listViewDog);
@@ -80,8 +85,6 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
         editTextAdoptionSearch = view.findViewById(R.id.editTextAdoptionSearch);
         buttonAdoptionSearch = view.findViewById(R.id.buttonAdoptionSearch);
 
-        downloadAllDog(getContext(), USER_URL);
-
         buttonAdoptionSearch.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -92,31 +95,41 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
         }
         );
 
-        /*listViewDog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewDog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String dogID = ((Dog) listViewDog.getItemAtPosition(position)).getDogId();
 
-                Toast.makeText(getContext(), dogID, Toast.LENGTH_LONG).show();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.pref_file), Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("dogDetailsID", dogID);
+
+                editor.apply();
 
                 FragmentManager fragmentManager1 = getActivity().getSupportFragmentManager();
 
                 FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
 
-                HomeFragment importFragment = new HomeFragment();
-
-                importFragment.
+                DogDetailsAndAdoption importFragment = new DogDetailsAndAdoption();
 
                 fragmentTransaction.replace(R.id.fragment_content,importFragment);
 
                 fragmentTransaction.commit();
             }
-        });*/
+        });
+
+        downloadAllDog(getContext(), USER_URL);
 
         return view;
     }
 
     private void downloadAllDog(Context context, String url)
     {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.pref_file), Context.MODE_PRIVATE);
+        final String adoptedDogId = sharedPreferences.getString("dogDetailsID", "");
+
         // Instantiate the RequestQueue
         queue = Volley.newRequestQueue(context);
 
@@ -182,6 +195,12 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
                             pDialog.dismiss();
                     }
                 });
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("dogDetailsID", "");
+
+        editor.apply();
 
         // Set the tag on the request.
         jsonObjectRequest.setTag(TAG);
@@ -387,4 +406,5 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
             listViewDog.setAdapter(adapter);
         }
     }
+
 }

@@ -71,4 +71,7 @@
     <string name="recommended_dogs">Recommended Dogs</string>
     <string name="search_here">Search here</string>
     <string name="search_by">Search by:</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="adopt">Adopt</string>
 </resources>
