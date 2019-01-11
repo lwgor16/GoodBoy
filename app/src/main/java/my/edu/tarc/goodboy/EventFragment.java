@@ -1,11 +1,12 @@
 package my.edu.tarc.goodboy;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +54,24 @@ public class EventFragment extends Fragment {
         listViewEvent = (ListView) view.findViewById(R.id.listViewEvent);
 
         downloadEvent(getContext(), EVENT_URL);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButtonAdd);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().setTitle("Events");
+
+                FragmentManager fragmentManager1 = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
+
+                AddEventFragment importFragment = new AddEventFragment();
+
+                fragmentTransaction.replace(R.id.fragment_content,importFragment);
+
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
     }

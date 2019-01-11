@@ -9,8 +9,9 @@ public class User {
     private int userAge;
     private String userGender;
     private String userICNumber;
+    private int userAccountType;
 
-    public User(String userName, String userPassword, String userRealName, String userAddress, String userContactNumber, int userAge, String userGender, String userICNumber) {
+    public User(String userName, String userPassword, String userRealName, String userAddress, String userContactNumber, int userAge, String userGender, String userICNumber, int userAccountType) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userRealName = userRealName;
@@ -19,6 +20,7 @@ public class User {
         this.userAge = userAge;
         this.userGender = userGender;
         this.userICNumber = userICNumber;
+        this.userAccountType = userAccountType;
     }
 
     public User() {
@@ -86,5 +88,13 @@ public class User {
 
     public void setUserGender(String userGender) {
         this.userGender = userGender;
+    }
+
+    public int getUserAccountType() {
+        return userAccountType;
+    }
+
+    public void setUserAccountType(int userAccountType) {
+        this.userAccountType = userAccountType;
     }
 }

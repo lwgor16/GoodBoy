@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -119,6 +120,27 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
             }
         });
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButtonAddDog);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                getActivity().setTitle("AddDog");
+
+                FragmentManager fragmentManager1 = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
+
+                AddDogFragment addDogFragment = new AddDogFragment();
+
+                fragmentTransaction.replace(R.id.fragment_content,addDogFragment);
+
+                fragmentTransaction.commit();
+            }
+        });
+
+
         downloadAllDog(getContext(), USER_URL);
 
         return view;
@@ -154,7 +176,9 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
                                 String gender = courseResponse.getString("gender");
                                 int age = courseResponse.getInt("age");
                                 String size = courseResponse.getString("size");
+                                String date = courseResponse.getString("add_date");
                                 Dog dog = new Dog(id, breed, color, condition, organization, gender, age, size);
+                                dog.setDayInDatabase(date);
                                 daList.add(dog);
                             }
 

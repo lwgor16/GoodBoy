@@ -166,7 +166,8 @@ public class LoginFragment extends Fragment {
                                 String userContactNumber = courseResponse.getString("contact_no");
                                 String userGender = courseResponse.getString("gender");
                                 String userICNumber = courseResponse.getString("ic_no");
-                                User user = new User(userName, userPassword, userRealName, userAddress, userContactNumber,userAge,userGender,userICNumber);
+                                int userAccountType = Integer.parseInt(courseResponse.getString("acc_type"));
+                                User user = new User(userName, userPassword, userRealName, userAddress, userContactNumber,userAge,userGender,userICNumber, userAccountType);
                                 uaList.add(user);
                             }
 
