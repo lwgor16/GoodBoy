@@ -248,7 +248,7 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
         recommendedList.clear();
         for(int i = 0; i<daList.size(); i++)
         {
-            if(daList.get(i).getDogAge() >= 5)
+            if(daList.get(i).getDogAge() >= 5 || daList.get(i).getDayInDatabase() >= 60)
             {
                 recommendedList.add(daList.get(i));
             }
@@ -343,17 +343,24 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
 
                 if(search.indexOf('-') == -1)
                 {
-                    age = Integer.parseInt(search);
-
-                    for(int i = 0; i < daList.size(); i++)
+                    try
                     {
-                        if(daList.get(i).getDogAge() == age)
+                        age = Integer.parseInt(search);
+
+                        for(int i = 0; i < daList.size(); i++)
                         {
-                            searchList.add(daList.get(i));
+                            if(daList.get(i).getDogAge() == age)
+                            {
+                                searchList.add(daList.get(i));
+                            }
                         }
+                    }
+                    catch (NumberFormatException e) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Invalid input!", Toast.LENGTH_LONG).show();
                     }
                 }
                 else
+                {try
                 {
                     minRange = Integer.parseInt(search.substring(0, rangeSign));
                     maxRange = Integer.parseInt(search.substring(rangeSign + 1, endSign));
@@ -365,6 +372,11 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
                             searchList.add(daList.get(i));
                         }
                     }
+                }
+                catch (NumberFormatException e) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Invalid input!", Toast.LENGTH_LONG).show();
+                }
+
                 }
             }
             else if (index == 3)
@@ -436,9 +448,13 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
                 Toast.makeText(getActivity().getApplicationContext(), "Results found!", Toast.LENGTH_LONG).show();
             }
 
-            final DogAdapter adapter = new DogAdapter(getActivity(), R.layout.fragment_organization, searchList);
+            editTextAdoptionSearch.setText("");
+
+            final DogAdapter adapter = new DogAdapter(getActivity(), R.layout.fragment_adoption, searchList);
             listViewDog.setAdapter(adapter);
         }
     }
+
+
 
 }
