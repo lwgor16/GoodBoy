@@ -8,6 +8,10 @@ public class Event {
     private String eventLocation;
     private String eventOrganiser;
 
+    public Event(String eventName) {
+        this.eventName = eventName;
+    }
+
     public Event(String eventID, String eventName, String eventDesc, String eventDateTime, String eventLocation, String eventOrganiser) {
         this.eventID = eventID;
         this.eventName = eventName;

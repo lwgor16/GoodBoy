@@ -3,14 +3,12 @@ package my.edu.tarc.goodboy;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,64 +25,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass
- */
-public class OrganizationFragment extends Fragment {
-
+public class OrganisationDetailsFragment extends Fragment {
     private static RequestQueue queue;
     private ProgressDialog pDialog;
+
+    private int position;
+
     List<Organization> oaList;
     ListView listViewOrganization;
+
     private static final String TAG = "my.edu.tarc.lab44";
     private static String ORGANIZATION_URL = "https://khorwe.000webhostapp.com/select_organization.php";
 
-    public OrganizationFragment() {
+    public OrganisationDetailsFragment()
+    {
         // Required empty public constructor
-
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_organization, container, false);
+        View view = inflater.inflate(R.layout.fragment_organisation_details, container, false);
 
         pDialog = new ProgressDialog(getActivity());
 
         oaList = new ArrayList<>();
 
+        SharedPreferences sharedPreferences;
+
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.organisationDetails), Context.MODE_PRIVATE);
+
+        position = sharedPreferences.getInt("position", 0);
+
         listViewOrganization = (ListView) view.findViewById(R.id.listViewOrganization);
-
-        listViewOrganization.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.organisationDetails),Context.MODE_PRIVATE);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putInt("position",position);
-
-                editor.apply();
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                OrganisationDetailsFragment importFragment = new OrganisationDetailsFragment();
-
-                fragmentTransaction.replace(R.id.fragment_content,importFragment);
-
-                fragmentTransaction.commit();
-
-            }
-        });
 
         downloadOrganization(getContext(), ORGANIZATION_URL);
 
         return view;
     }
+
 
     private void downloadOrganization(Context context, String url) {
         // Instantiate the RequestQueue
@@ -102,14 +82,17 @@ public class OrganizationFragment extends Fragment {
                         try
                         {
                             oaList.clear();
-                            for (int i = 0; i < response.length(); i++)
-                            {
-                                JSONObject courseResponse = (JSONObject) response.get(i);
-                                String name = courseResponse.getString("name");
-                                Organization organization = new Organization(name);
-                                oaList.add(organization);
-                            }
+                            JSONObject courseResponse = (JSONObject) response.get(position);
+                            String id = courseResponse.getString("id");
+                            String name = courseResponse.getString("name");
+                            String location = courseResponse.getString("location");
+                            String owner = courseResponse.getString("owner");
+                            String phone_no = courseResponse.getString("phone_no");
+                            Organization organization = new Organization(id, name, location, owner, phone_no);
+                            oaList.add(organization);
+
                             loadOrganization();
+
                             if (pDialog.isShowing())
                                 pDialog.dismiss();
                         } catch (Exception e)
@@ -136,8 +119,9 @@ public class OrganizationFragment extends Fragment {
 
     private void loadOrganization()
     {
-        final OrganisationListAdapter adapter = new OrganisationListAdapter(getActivity(), R.layout.fragment_organization, oaList);
+        final OrganisationDetailsAdapter adapter = new OrganisationDetailsAdapter(getActivity(), R.layout.fragment_organisation_details, oaList);
         listViewOrganization.setAdapter(adapter);
         Toast.makeText(getContext(), "Count :" + oaList.size(), Toast.LENGTH_LONG).show();
     }
+
 }

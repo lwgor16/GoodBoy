@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -59,6 +58,30 @@ public class EventFragment extends Fragment {
         eaList = new ArrayList<>();
 
         listViewEvent = (ListView) view.findViewById(R.id.listViewEvent);
+
+        listViewEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.eventDetails),Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putInt("positionEvent",position);
+
+                editor.apply();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                EventDetailsFragment importFragment = new EventDetailsFragment();
+
+                fragmentTransaction.replace(R.id.fragment_content,importFragment);
+
+                fragmentTransaction.commit();
+            }
+        });
 
         downloadEvent(getContext(), EVENT_URL);
 
@@ -109,13 +132,8 @@ public class EventFragment extends Fragment {
                             eaList.clear();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject courseResponse = (JSONObject) response.get(i);
-                                String id = courseResponse.getString("id");
                                 String name = courseResponse.getString("name");
-                                String desc = courseResponse.getString("desc");
-                                String date_time = courseResponse.getString("date_time");
-                                String location = courseResponse.getString("location");
-                                String organizer = courseResponse.getString("organizer");
-                                Event event = new Event(id, name, desc, date_time, location, organizer);
+                                Event event = new Event(name);
                                 eaList.add(event);
                             }
                             loadEvent();
@@ -143,7 +161,7 @@ public class EventFragment extends Fragment {
     }
 
     private void loadEvent() {
-        final EventAdapter adapter = new EventAdapter(getActivity(), R.layout.fragment_event, eaList);
+        final EventListAdapter adapter = new EventListAdapter(getActivity(), R.layout.fragment_event, eaList);
         listViewEvent.setAdapter(adapter);
         Toast.makeText(getActivity().getApplicationContext(), "Count :" + eaList.size(), Toast.LENGTH_LONG).show();
     }

@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class OrganizationAdapter extends ArrayAdapter<Organization> {
-    public OrganizationAdapter(Activity context, int resource, List<Organization> list) {
+public class OrganisationDetailsAdapter extends ArrayAdapter<Organization> {
+    public OrganisationDetailsAdapter(Activity context, int resource, List<Organization> list) {
         super(context, resource, list);
     }
 

@@ -101,7 +101,7 @@ public class DisplayEventDetails extends AppCompatActivity {
     }
 
     private void loadEvent() {
-        final EventAdapter adapter = new EventAdapter(this, R.layout.fragment_event, eaList);
+        final EventDetailsAdapter adapter = new EventDetailsAdapter(this, R.layout.fragment_event, eaList);
         listViewEvent.setAdapter(adapter);
         Toast.makeText(this.getApplicationContext(), "Count :" + eaList.size(), Toast.LENGTH_LONG).show();
     }

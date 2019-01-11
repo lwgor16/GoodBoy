@@ -104,7 +104,7 @@ public class DisplayOrganisationDetails extends AppCompatActivity {
 
     private void loadOrganization()
     {
-        final OrganizationAdapter adapter = new OrganizationAdapter(this, R.layout.fragment_organization, oaList);
+        final OrganisationDetailsAdapter adapter = new OrganisationDetailsAdapter(this, R.layout.fragment_organization, oaList);
         listViewOrganization.setAdapter(adapter);
         Toast.makeText(this, "Count :" + oaList.size(), Toast.LENGTH_LONG).show();
     }

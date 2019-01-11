@@ -7,6 +7,10 @@ public class Organization {
     private String organizationOwner;
     private String organizationPhoneNumber;
 
+    public Organization(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
     public Organization(String organizationID, String organizationName, String organizationLocation, String organizationOwner, String organizationPhoneNumber) {
         this.organizationID = organizationID;
         this.organizationName = organizationName;

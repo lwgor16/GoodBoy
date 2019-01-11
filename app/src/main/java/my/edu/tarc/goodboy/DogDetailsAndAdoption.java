@@ -100,7 +100,7 @@ public class DogDetailsAndAdoption extends Fragment {
             public void onClick(View v)
             {
                 deleteDog();
-                
+
                 Toast.makeText(getActivity().getApplicationContext(), "Information sent to Organization! Please contact them for more details for the adoption.", Toast.LENGTH_LONG).show();
             }
         });

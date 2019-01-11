@@ -180,18 +180,6 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_content,importFragment);
 
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_settings) {
-            setTitle("Settings");
-
-            FragmentManager fragmentManager1 = getSupportFragmentManager();
-
-            FragmentTransaction fragmentTransaction = fragmentManager1.beginTransaction();
-
-            SettingsFragment importFragment = new SettingsFragment();
-
-            fragmentTransaction.replace(R.id.fragment_content,importFragment);
-
-            fragmentTransaction.commit();
         } else if (id == R.id.nav_feedback) {
             setTitle("Feedback");
 
