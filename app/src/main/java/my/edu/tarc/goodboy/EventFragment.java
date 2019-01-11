@@ -2,7 +2,10 @@ package my.edu.tarc.goodboy;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +28,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,6 +41,8 @@ public class EventFragment extends Fragment {
     ListView listViewEvent;
     private static final String TAG = "my.edu.tarc.lab44";
     private static String EVENT_URL = "https://khorwe.000webhostapp.com/select_event.php";
+
+    SharedPreferences sharedPreferences;
 
     public EventFragment() {
         // Required empty public constructor
@@ -72,6 +79,15 @@ public class EventFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.pref_file), MODE_PRIVATE);
+
+        boolean organization = sharedPreferences.getBoolean("organization", false);
+
+        if (!organization) {
+            fab.setX(-50000);
+            fab.setY(-50000);
+        }
 
         return view;
     }

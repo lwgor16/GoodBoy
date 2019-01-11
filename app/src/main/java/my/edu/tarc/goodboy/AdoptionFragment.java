@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -139,6 +140,15 @@ public class AdoptionFragment extends Fragment implements AdapterView.OnItemSele
                 fragmentTransaction.commit();
             }
         });
+
+        sharedPreferences = getActivity().getSharedPreferences(getString(R.string.pref_file), MODE_PRIVATE);
+
+        boolean organization = sharedPreferences.getBoolean("organization", false);
+
+        if (!organization) {
+            fab.setX(-50000);
+            fab.setY(-50000);
+        }
 
 
         downloadAllDog(getContext(), USER_URL);

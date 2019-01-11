@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loadData();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -78,6 +80,15 @@ public class MainActivity extends AppCompatActivity
 
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        loadData();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -217,6 +228,7 @@ public class MainActivity extends AppCompatActivity
                 editor.putString("username", "");
                 editor.putString("realName", "");
                 editor.putBoolean("login", false);
+                editor.putBoolean("organization", false);
 
                 editor.apply();
 

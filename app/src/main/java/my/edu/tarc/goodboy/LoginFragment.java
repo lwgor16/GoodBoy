@@ -109,6 +109,12 @@ public class LoginFragment extends Fragment {
                                                   editor.putString("username", uaList.get(userIndex).getUserName());
                                                   editor.putString("realName", uaList.get(userIndex).getUserRealName());
                                                   editor.putBoolean("login", true);
+                                                  if (uaList.get(userIndex).getUserAccountType() == 1) {
+                                                      editor.putBoolean("organization", true);
+                                                  }
+                                                  else {
+                                                      editor.putBoolean("organization", false);
+                                                  }
 
                                                   editor.apply();
 
