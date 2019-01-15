@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class OrganisationImageAdapter extends PagerAdapter {
     Activity activity;
     private Context mContext;
-    private int[] mImageIds = new int[]{R.drawable.bye,R.drawable.gg,R.drawable.hi};
+    private int[] mImageIds = new int[]{R.drawable.organisation1,R.drawable.organisation2,R.drawable.organisation3};
 
     OrganisationImageAdapter(Context context)
     {

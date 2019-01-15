@@ -11,7 +11,7 @@ import android.widget.ImageView;
 public class EventImageAdapter extends PagerAdapter {
     private ImageView imageView;
     private Context mContext;
-    private int[] mImageIds = new int[]{R.drawable.bye,R.drawable.gg,R.drawable.hi};
+    private int[] mImageIds = new int[]{R.drawable.event1,R.drawable.event2,R.drawable.event3};
 
     EventImageAdapter(Context context)
     {
